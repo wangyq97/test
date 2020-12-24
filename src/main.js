@@ -3,6 +3,9 @@ import App from './App.vue'
 import echarts from 'echarts'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import selectMutiple from '../comon/component/select.vue'
+Vue.component('selectMutiple',selectMutiple)
+
 
 Vue.use(ElementUI);
 

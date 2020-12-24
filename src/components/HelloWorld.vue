@@ -1,7 +1,8 @@
 <template>
   <div>
+    <selectMutiple @selectData='selectData' :options="options"  />
     <!-- <div style="width: 500px; height: 500px" ref="chart"></div> -->
-    <el-select
+    <!-- <el-select
       style="height: 40px"
       @change="selectAll"
       v-model="value"
@@ -17,7 +18,7 @@
         <el-checkbox class="aaa" v-model="item.ischeck"></el-checkbox>
         <span style="margin-left: 8px">{{ item.label }}</span>
       </el-option>
-    </el-select>
+    </el-select> -->
 
     <!-- <select v-model="selectList" @change="handNewChange" multiple placeholder="请选择">
       <option v-for="(item,index) in years" :key="index" :value="item" >
@@ -28,7 +29,11 @@
   </div>
 </template>
 <script>
+
 export default {
+  // components: {
+  //   selectMutiple
+  // },
   data() {
     return {
       options: [
@@ -63,55 +68,58 @@ export default {
           ischeck: false,
         },
       ],
-      oldOptions:[],
-      value:[],
+      // oldOptions:[],
+      // value:[],
       // value1: [],
-      flag: false,
+      // flag: false,
       // years: [2013, 2014, 2015, 2016, 2017, 2018, 2019],
       // selectList: [],
     };
   },
   methods: {
-    selectAll(valArr) {
-      const allIdArr = [];
-      // 保存所有选项的id
-      for (const argumentId of this.options) {
-        allIdArr.push(argumentId.id);
-      }
-      const oldVal = this.oldOptions.length === 1 ? this.oldOptions[0] : [];
-      // 当前选中的有'全选'
-      if (valArr.includes("allSelect")) {
-        this.value = allIdArr;
-      }
-      // 旧数据包含'全选'，当前选中数据不包含全选
-      if (oldVal.includes("allSelect") && !valArr.includes("allSelect")) {
-        this.value = [];
-      }
-      // 旧数据包含'全选'，当前选中数据包含全选
-      if (oldVal.includes("allSelect") && valArr.includes("allSelect")) {
-        const index = valArr.indexOf("allSelect");
-        valArr.splice(index, 1); // 排除全选选项
-        this.value = valArr;
-      }
-      // 旧数据不包含'全选'，当前选中数据不包含'全选'
-      if (!oldVal.includes("allSelect") && !valArr.includes("allSelect")) {
-        console.log(11);
-        // 除了全选外 其他全部选中时
-        if (valArr.length === allIdArr.length - 1) {
-          this.value = ["allSelect"].concat(valArr);
-        }
-      }
-      // 数据发生变化时保存数据，作为下次对比的旧数据
-      this.oldOptions[0] = this.value;
-      this.options.forEach(v => {
-        v.ischeck = false
-        this.value.forEach(e => {
-          if (v.id === e) {
-            v.ischeck = true;
-          }
-        })
-      })
+    selectData (val) {
+      console.log(val)
     },
+    // selectAll(valArr) {
+    //   const allIdArr = [];
+    //   // 保存所有选项的id
+    //   for (const argumentId of this.options) {
+    //     allIdArr.push(argumentId.id);
+    //   }
+    //   const oldVal = this.oldOptions.length === 1 ? this.oldOptions[0] : [];
+    //   // 当前选中的有'全选'
+    //   if (valArr.includes("allSelect")) {
+    //     this.value = allIdArr;
+    //   }
+    //   // 旧数据包含'全选'，当前选中数据不包含全选
+    //   if (oldVal.includes("allSelect") && !valArr.includes("allSelect")) {
+    //     this.value = [];
+    //   }
+    //   // 旧数据包含'全选'，当前选中数据包含全选
+    //   if (oldVal.includes("allSelect") && valArr.includes("allSelect")) {
+    //     const index = valArr.indexOf("allSelect");
+    //     valArr.splice(index, 1); // 排除全选选项
+    //     this.value = valArr;
+    //   }
+    //   // 旧数据不包含'全选'，当前选中数据不包含'全选'
+    //   if (!oldVal.includes("allSelect") && !valArr.includes("allSelect")) {
+    //     console.log(11);
+    //     // 除了全选外 其他全部选中时
+    //     if (valArr.length === allIdArr.length - 1) {
+    //       this.value = ["allSelect"].concat(valArr);
+    //     }
+    //   }
+    //   // 数据发生变化时保存数据，作为下次对比的旧数据
+    //   this.oldOptions[0] = this.value;
+    //   this.options.forEach(v => {
+    //     v.ischeck = false
+    //     this.value.forEach(e => {
+    //       if (v.id === e) {
+    //         v.ischeck = true;
+    //       }
+    //     })
+    //   })
+    // },
 
     handRemoveTag(e) {
       console.log(e);
